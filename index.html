@@ -1,0 +1,267 @@
+<html>
+
+<head>
+    <title>Hyvää joulua</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* Add styling for the header banner */
+        header {
+            background-color: rgb(216, 7, 7);
+            color: white;
+            text-align: center;
+            padding: 1px;
+            margin-bottom: 20px;
+            /* add a margin underneath the header */
+            border: 10px solid black;
+            /* add a border around the header */
+            box-shadow: 5px 5px 10px gray;
+            /* add a shadow to the header */
+        }
+
+        /* Add styling for the header text */
+        header h1 {
+            font-size: 36px;
+            /* border: 2px solid white; */
+            /* add a border around the letters */
+            text-shadow: 2px 2px 4px gray;
+            /* add a shadow to the letters */
+        }
+
+        /* Add styling for the subheader text */
+        header h2 {
+            font-size: 24px;
+            text-shadow: 2px 2px 4px gray;
+            /* add a shadow to the letters */
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        /* Add styling for the footer banner */
+        footer {
+            background-color: rgb(216, 7, 7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            border: 10px solid black;
+            /* add a border around the footer */
+            box-shadow: 5px 5px 10px gray;
+            /* add a shadow to the footer */
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        li {
+            position: relative;
+            width: 300px;
+            margin: 20px;
+            border: 2px solid black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add some styling for the images */
+        .image {
+            width: 240px;
+            height: 240px;
+            border: 1px solid black;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        /* Add some styling for the snowflakes */
+        .snowflake {
+            position: absolute;
+            top: 50px;
+            /* start the snowflakes off the top of the screen */
+            font-size: 20px;
+            /* set the size of the snowflakes */
+            color: white;
+            /* set the color of the snowflakes */
+        }
+
+        /* Add styling for the frame */
+        /* Add styling for the frame */
+        .frame {
+            border: 10px solid black;
+            width: 760px;
+            /* total width of the images plus margins */
+            height: 790px;
+            /* total height of the images plus margins */
+            display: flex;
+            flex-wrap: wrap;
+            margin: auto;
+            justify-content: center;
+            /* center the images within the frame */
+
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+
+        /* Add styling for the button */
+        button {
+            margin: 20px;
+            /* add some margin around the button */
+            padding: 10px;
+            /* add some padding to the button */
+            border: 2px solid black;
+            /* add a border around the button */
+            background-color: lightblue;
+            /* set the background color of the button */
+            color: white;
+            /* set the text color of the button */
+            font-size: 18px;
+            /* set the font size of the button */
+            cursor: pointer;
+            /* change the cursor to a pointer when hovering over the button */
+        }
+
+        nav {
+            position: absolute;
+            /* position the navigation bar absolutely */
+            left: 20px;
+            /* set the left position of the navigation bar */
+            top: calc(50px + 80px);
+            /* set the top position of the navigation bar */
+            width: 150px;
+            /* set the width of the navigation bar */
+            height: calc(100% - calc(100px + 80px));
+            /* set the height of the navigation bar */
+            background-color: transparent;
+            /* set the background color of the navigation bar */
+            padding: 20px;
+            /* add some padding to the navigation bar */
+        }
+
+    </style>
+</head>
+<!DOCTYPE html>
+<html>
+
+<header>
+    <h1>Mäyräkoiria Oskarin lempipuuhissa</h1>
+    <h2>Hyvää joulua!</h2>
+</header>
+
+<body>
+
+    <!-- Add a div element to wrap the images -->
+    <div class="frame">
+        <!-- Add 8 images to the page -->
+        <img class="image" src="https://i.ibb.co/zrBrj5F/hund1.png" alt="Image 1">
+        <img class="image" src="https://i.ibb.co/m0sxrf4/hund2.png" alt="Image 2">
+        <img class="image" src="https://i.ibb.co/sjdg7tn/hund4.png" alt="Image 3">
+        <img class="image" src="https://i.ibb.co/RHxyKR5/hund3.png" alt="Image 4">
+        <img class="image" src="https://i.ibb.co/5WWwQ6B/DALL-E-2022-12-22-12-18-21-Ugly-christmas-sweater.png"
+            alt="Image 9">
+        <img class="image" src="https://i.ibb.co/G9DMShf/hund5.png" alt="Image 5">
+        <img class="image" src="https://i.ibb.co/h1BFKXc/hund6.png" alt="Image 6">
+        <img class="image" src="https://i.ibb.co/NF72Xz9/hund7.png" alt="Image 7">
+        <img class="image" src="https://i.ibb.co/kQ6McgG/hund8.png" alt="Image 8">
+    </div>
+
+    <nav>
+        <button id="generate-snowflakes-button">Generate Snowflakes</button>
+        <button>Button 1</button>
+        <button>Button 2</button>
+    </nav>
+
+</body>
+
+<footer>
+    <p>Xmas 2022</p>
+</footer>
+
+<script>
+    // create a function to generate snowflakes
+    function generateSnowflakes() {
+        // create a new snowflake element
+        var snowflake = document.createElement("div");
+        // add the snowflake class to the element
+        snowflake.classList.add("snowflake");
+        // add some content to the snowflake element
+        snowflake.innerHTML = "❄️";
+        // set a random left position for the snowflake
+        snowflake.style.left = Math.random() * window.innerWidth + "px";
+        // add the snowflake element to the body of the page
+        document.body.appendChild(snowflake);
+    }
+
+    function getRandomIntBetweenMinusOneAndOne() {
+        // generate a random number between 0 and 1
+        var randomNumber = Math.random();
+        // if the random number is less than 0.5, return -1
+        if (randomNumber < 0.8) {
+            return 0;
+        }
+
+        else if (randomNumber < 0.4) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
+    }
+
+    // create a function to animate the snowflakes
+    function animateSnowflakes() {
+
+        // get all the snowflake elements on the page
+        var snowflakes = document.querySelectorAll(".snowflake");
+        // loop through each snowflake element
+        var i = 0
+        snowflakes.forEach(function (snowflake) {
+            // get the current top position of the snowflake
+
+            var top = document.querySelectorAll(".snowflake")[i].offsetTop
+            var left = document.querySelectorAll(".snowflake")[i].offsetLeft
+            var rand = getRandomIntBetweenMinusOneAndOne();
+
+
+            console.log(top)
+            console.log(i)
+            // set the new top position of the snowflake
+            snowflake.style.top = top + 2 + "px";
+            snowflake.style.left = left + rand + "px";
+
+            // if the snowflake has reached the bottom of the screen, remove it
+            if (top > window.innerHeight) {
+                snowflake.remove();
+            }
+            i += 1
+        });
+    }
+
+    // get the generate snowflakes button
+    var generateSnowflakesButton = document.getElementById("generate-snowflakes-button");
+    // attach an event listener to the button that calls the generateSnowflakes function when the button is clicked
+    generateSnowflakesButton.addEventListener("click", generateSnowflakes);
+
+
+    // animate the snowflakes every 50 milliseconds
+    setInterval(animateSnowflakes, 25);
+</script>
+
+
+
+</html>
