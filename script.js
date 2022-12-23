@@ -61,4 +61,5 @@
     var generateSnowflakesButton = document.getElementById("generate-snowflakes-button");
     // attach an event listener to the button that calls the generateSnowflakes function when the button is clicked
     generateSnowflakesButton.addEventListener("click", generateSnowflakes);
+    
 
