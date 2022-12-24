@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Doggogame</title>        
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-        <script src="js/phaser.min.js"></script>       
-        <script src="js/game.js"></script>        
-        <script src="js/units.js"></script>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Doggogame</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="js/phaser.min.js"></script>
+    <script src="js/world.js"></script>
+    <script src="js/battle.js"></script>
+    <script src="js/start.js"></script>
+    <style>
         html,
         body {
             margin: 200;
@@ -15,38 +17,57 @@
             display: flex;
             flex-direction: row;
         }
+
         #content {
-            width: 50%;
+            width: 100%;
+            position: relative;
             text-align: center;
             z-index: 1;
         }
+
         iframe {
-            width: 50%;
+            width: 100%;
             text-align: right;
             display: none;
         }
+
         button {
             position: right;
-            /* right: 0; */
+            right: 0;
+           /*  z-index: 2;  */
+        }
+
+        nav {
+            position: absolute;
+            right: 0;
             z-index: 2;
         }
     </style>
-    </head>
-    <body>
-        <div id="content"></div>
+</head>
+
+<body>
+    <div id="content" style="display: block; width: 100%; text-align: center"></div>
+    <nav>
         <button onclick="toggleForm()">Give Feedback!</button>
-        <iframe id="feedback-form" src="https://docs.google.com/forms/d/e/1FAIpQLSeNr58Ehj30zRwMfMSmodp9aIhLSCs1mmm8SeG39OGpbEirKA/viewform?embedded=true" width="200" height="480"></iframe>
-        <script>
-            function toggleForm() {
-                var form = document.getElementById("feedback-form");
-                if (form.style.display === "none") {
-                    form.style.display = "block";
-                } else {
-                    form.style.display = "none";
-                }
+        <iframe id="feedback-form" src="https://docs.google.com/forms/d/e/1FAIpQLSeNr58Ehj30zRwMfMSmodp9aIhLSCs1mmm8SeG39OGpbEirKA/viewform?embedded=true" 
+            width="350" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            
+    </nav>
+    <script>
+        function toggleForm() {
+            var form = document.getElementById("feedback-form");
+
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else if (form.style.display === "block") {
+                form.style.display = "none";
+            } else {
+                form.style.display = "block";
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
+
 </html>
 
 <!-- 
@@ -73,4 +94,3 @@
         width="200" height="600" style="display: block; width: 30%; float: right; text-align: right"></iframe>
      </body>
 </html> -->
-
