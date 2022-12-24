@@ -8,6 +8,7 @@ var BootScene = new Phaser.Class({
 
         function BootScene() {
             Phaser.Scene.call(this, { key: 'BootScene' });
+
         },
 
     preload: function () {
@@ -92,7 +93,7 @@ var WorldScene = new Phaser.Class({
                    // add the house sprite to the obstacles layer
                    obstacles.add(this.house); */
 
-
+        console.log("why u even here");
         //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
         this.anims.create({
             key: 'left',
@@ -152,7 +153,7 @@ var WorldScene = new Phaser.Class({
         }
         // add collider
         this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
-
+        this.sys.events.on('wake', this.wake, this);
         // launch UI
         //this.scene.launch("UIWorldScene");
     },
@@ -165,7 +166,7 @@ var WorldScene = new Phaser.Class({
         this.cameras.main.shake(300);
 
         // switch to BattleScene
-        this.scene.sleep('UIWorldScene');
+        //this.scene.sleep('UIWorldScene');
         this.scene.switch('BattleScene');
     },
     update: function (time, delta) {
@@ -207,6 +208,13 @@ var WorldScene = new Phaser.Class({
         else {
             this.player.anims.stop();
         }
+    },
+
+    wake: function() {
+        this.cursors.left.reset();
+        this.cursors.right.reset();
+        this.cursors.up.reset();
+        this.cursors.down.reset();
     }
 
 
@@ -261,11 +269,11 @@ var BattleScene = new Phaser.Class({
 
     startBattle: function () {
         // player character - warrior
-        var warrior = new PlayerCharacter(this, 250, 50, 'player', 52, 'Meleedoggo', 100, 20);
+        var warrior = new PlayerCharacter(this, 250, 50, 'player', 52, 'Meleedoggo', 100, 100);//20
         this.add.existing(warrior);
 
         // player character - mage
-        var mage = new PlayerCharacter(this, 250, 100, 'player', 48, 'Magedoggo', 80, 8);
+        var mage = new PlayerCharacter(this, 250, 100, 'player', 48, 'Magedoggo', 80, 100); //8
         this.add.existing(mage);
 
         var dragonblue = new Enemy(this, 50, 50, 'dragon', 0, 'Örkkilö', 50, 3);
@@ -283,12 +291,17 @@ var BattleScene = new Phaser.Class({
 
         this.index = -1; // currently active unit
 
-        this.scene.launch("UIScene");
+        this.scene.run('UIScene');
+        console.log("issue with get uiscene");
+        this.UIScene = this.scene.get("UIScene");
+        console.log("no issue with get uiscene");
         //this.scene.scale(800, 600);
     },
 
     nextTurn: function () {
         // if we have victory or game over
+        console.log("start of nextturn");
+
         if (this.checkEndBattle()) {
             this.endBattle();
             return;
@@ -316,8 +329,10 @@ var BattleScene = new Phaser.Class({
             // add timer for the next turn, so will have smooth gameplay
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
-
+        console.log("end of nextturn before update infobox");
         this.events.emit("UpdateInfoBox");
+        console.log("end of nextturn after update infobox");
+
     },
 
     receivePlayerSelection: function (action, target) {
@@ -328,12 +343,18 @@ var BattleScene = new Phaser.Class({
     },
 
     exitBattle: function () {
+        console.log(this.infoboxes);
+        console.log("exitingbattle here");
+        this.cursors.left.reset();
+        this.cursors.right.reset();
+        this.cursors.up.reset();
+        this.cursors.down.reset();
         this.scene.sleep('UIScene');
         this.scene.switch('WorldScene');
     },
 
     wake: function () {
-        this.scene.launch('UIScene');
+        this.scene.run('UIScene');
         this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
     },
 
@@ -361,8 +382,21 @@ var BattleScene = new Phaser.Class({
             // link item
             this.units[i].destroy();
         }
+
+        console.log(this.UIScene);
+        console.log(this.UIScene.infoboxes);
+        if (typeof this.UIScene.infoboxes != "undefined") {
+            for (var i = 0; i < this.UIScene.infoboxes.length; i++) {
+
+                this.UIScene.infoboxes[i].destroy();
+            }
+            this.UIScene.infoboxes = [];
+            console.log("if infoboxes succ. destroyed this sh b empty:");
+            console.log(this.UIScene.infoboxes);
+        }
+
         this.units.length = 0;
-        this.events.emit("endBattle");
+        //this.events.emit("endBattle");
         // sleep the UI
         this.scene.sleep('UIScene');
         // return to WorldScene and sleep current BattleScene
@@ -378,6 +412,8 @@ var UIScene = new Phaser.Class({
             Phaser.Scene.call(this, { key: 'UIScene' });
         },
     create: function () {
+
+       
         // draw some background for the menu
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(1, 0xffffff);
@@ -423,27 +459,28 @@ var UIScene = new Phaser.Class({
         this.battleScene.events.on("UpdateInfoBox", this.onUpdateInfoBox, this);
 
         // when the scene receives wake event
-        this.sys.events.on('wake', this.createMenu, this);
+        this.sys.events.on('wake', this.onWake, this);
 
         // when the battle ends
         this.battleScene.events.on("endBattle", this.onEndBattle, this);
-
         // the message describing the current action
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
-
+        console.log("before adding infoboxes in uiscene");
         if (typeof this.infoboxes == "undefined") {
             this.infoboxes = [];
-            this.add.existing(this.infoboxes);
-            console.log("first");
+            console.log("empty string added");
+            //this.add.existing(this.infoboxes);
         }
 
-        this.battleScene.units.forEach(element => {
-            this.infoBox = new infoBox(this.battleScene, this.battleScene.events, element);
-            this.add.existing(this.infoBox)
-            this.infoboxes.push(this.infoBox);
-        });
-        console.log(this.infoboxes);
+        if (this.infoboxes.length < this.battleScene.units.length) {
+            console.log("adding infoboxes in uiscene if less than length")
+            this.battleScene.units.forEach(element => {
+                this.infoBox = new infoBox(this.battleScene, this.battleScene.events, element);
+                this.add.existing(this.infoBox);
+                this.infoboxes.push(this.infoBox);
+            })
+        };
 
         this.createMenu();
     },
@@ -457,6 +494,25 @@ var UIScene = new Phaser.Class({
         this.battleScene.nextTurn();
 
     },
+
+    onWake: function () {
+        this.createMenu();
+        if (typeof this.infoboxes == "undefined") {
+            this.infoboxes = [];
+            console.log("empty string added");
+            //this.add.existing(this.infoboxes);
+        }
+
+        if (this.infoboxes.length < this.battleScene.units.length) {
+            console.log("adding infoboxes in uiscene if less than length")
+            this.battleScene.units.forEach(element => {
+                this.infoBox = new infoBox(this.battleScene, this.battleScene.events, element);
+                this.add.existing(this.infoBox);
+                this.infoboxes.push(this.infoBox);
+            })
+        }
+    },
+
     remapHeroes: function () {
         var heroes = this.battleScene.heroes;
         this.heroesMenu.remap(heroes);
@@ -499,10 +555,10 @@ var UIScene = new Phaser.Class({
     },
 
     onUpdateInfoBox: function () {
+        console.log(this.infoboxes);
         if (typeof this.infoboxes != "undefined") {
             this.infoboxes.forEach(element => {
                 element.updateBox();
-                console.log("we get to updateinfo per elements in UI event");
             });
         }
     },
@@ -513,6 +569,7 @@ var UIScene = new Phaser.Class({
                 element.destroy();
             });
         }
+        
     }
 });
 
@@ -520,9 +577,9 @@ var UIScene = new Phaser.Class({
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 320 ,
+    width: 320,
     height: 240,
-    
+
     zoom: 2,
     pixelArt: true,
     physics: {

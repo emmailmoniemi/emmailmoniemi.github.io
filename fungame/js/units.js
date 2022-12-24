@@ -207,7 +207,6 @@ var infoBox = new Phaser.Class({
             var graphics = this.scene.add.graphics();
             this.add(graphics);
             this.thisUnit = Unit;
-            console.log(this.thisUnit);
 
 
             if (this.Unit === Enemy) {
@@ -232,7 +231,6 @@ var infoBox = new Phaser.Class({
     showBox: function (text) {
         this.text.setText(text);
         this.visible = true;
-        console.log(text);
        /*  if (this.hideEvent)
             this.hideEvent.remove(false);
         this.hideEvent = this.scene.time.addEvent({ delay: 2000, callback: this.hideBox, callbackScope: this });
@@ -245,12 +243,6 @@ var infoBox = new Phaser.Class({
 
     updateBox: function () {
         this.showBox("HP " + this.thisUnit.hp + " / " + this.thisUnit.maxHp);
-        console.log(this.thisUnit);
-        console.log(this.thisUnit.hp);
-    },
-
-    destroy: function() {
-        this.destroy();
     }
 });
 
