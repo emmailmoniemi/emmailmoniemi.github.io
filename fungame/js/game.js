@@ -154,7 +154,7 @@ var WorldScene = new Phaser.Class({
         this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
 
         // launch UI
-        this.scene.launch("UIWorldScene");
+        //this.scene.launch("UIWorldScene");
     },
     onMeetEnemy: function (player, zone) {
         // we move the zone to some other location
