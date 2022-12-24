@@ -26,7 +26,7 @@ var BootScene = new Phaser.Class({
         this.load.spritesheet('dragon', 'assets/dragon.png', { frameWidth: 64, frameHeight: 64 });
 
         // Dialog plugin
-        this.load.plugin('DialogModalPlugin', 'plugins/dialog_plugin.js');
+        //this.load.plugin('DialogModalPlugin', 'plugins/dialog_plugin.js');
 
     },
 
@@ -222,11 +222,11 @@ var UIWorldScene = new Phaser.Class({
         },
     create: function () {
 
-        this.sys.install('DialogModalPlugin');
+        /* this.sys.install('DialogModalPlugin');
 
         this.sys.install('DialogModalPlugin');
         console.log(this.sys.dialogModal);
-        this.sys.dialogModal.init();
+        this.sys.dialogModal.init(); */
 
         // basic container to hold all menus
         //this.menus = this.add.container();
