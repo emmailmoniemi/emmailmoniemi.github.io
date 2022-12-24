@@ -95,6 +95,6 @@ DialogModalPlugin.prototype = {
         this.graphics = this.scene.add.graphics();
         this._createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
         this._createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
-    },
+    }
 
 };
