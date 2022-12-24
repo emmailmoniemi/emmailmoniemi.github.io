@@ -131,6 +131,7 @@ var WorldScene = new Phaser.Class({
         this.add.existing(this.score);
 
         this.infoText = this.add.text(16, 16, 'score: 0', { fontSize: '16px', fill: '#000' });
+        this.infoText.setScrollFactor(0,0);
         this.add.existing(this.infoText);
 
         this.healthpotionimage = new Image(this, 0, 0, 'potions', 1);
