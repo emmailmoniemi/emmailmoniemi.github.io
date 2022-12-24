@@ -50,7 +50,7 @@
             snowflake.style.left = left + rand + "px";
 
             // if the snowflake has reached the bottom of the screen, remove it
-            if (top > window.innerHeight) {
+            if (top > 300) {
                 snowflake.remove();
             }
             i += 1

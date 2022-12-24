@@ -151,7 +151,7 @@ button {
 nav {
     position: absolute;
     /* position the navigation bar absolutely */
-    left: 20px;
+    left: 0px;
     /* set the left position of the navigation bar */
     top: calc(50px + 180px);
     /* set the top position of the navigation bar */
