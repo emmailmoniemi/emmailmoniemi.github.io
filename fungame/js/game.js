@@ -269,11 +269,11 @@ var BattleScene = new Phaser.Class({
 
     startBattle: function () {
         // player character - warrior
-        var warrior = new PlayerCharacter(this, 250, 50, 'player', 52, 'Meleedoggo', 100, 100);//20
+        var warrior = new PlayerCharacter(this, 250, 50, 'player', 52, 'Meleedoggo', 100, 20);
         this.add.existing(warrior);
 
         // player character - mage
-        var mage = new PlayerCharacter(this, 250, 100, 'player', 48, 'Magedoggo', 80, 100); //8
+        var mage = new PlayerCharacter(this, 250, 100, 'player', 48, 'Magedoggo', 80, 13); 
         this.add.existing(mage);
 
         var dragonblue = new Enemy(this, 50, 50, 'dragon', 0, 'Örkkilö', 50, 3);
