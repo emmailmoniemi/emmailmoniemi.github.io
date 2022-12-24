@@ -9,7 +9,7 @@ var BattleScene = new Phaser.Class({
         this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
         this.WorldScene = this.scene.get("WorldScene");
         this.player = this.WorldScene.player;
-        this.add.existing(this.player);
+        //this.add.existing(this.player);
         this.startBattle();
         // on wake event we call startBattle too
         this.sys.events.on('wake', this.startBattle, this);
