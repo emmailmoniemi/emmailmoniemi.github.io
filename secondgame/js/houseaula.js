@@ -14,16 +14,17 @@ var houseAulaScene = new Phaser.Class({
   
     create: function () {
   
-      const map = this.make.tilemap({ key: 'map' });
-      const tiles = map.addTilesetImage('tilesheet', 'tiles');
+      const houseaulamap = this.make.tilemap({ key: 'houseaulamap' });
+      const tiles = houseaulamap.addTilesetImage('tilesheet', 'tiles');
   
-      const platforms = map.createStaticLayer('Ground', tiles, 0, 0);
-      const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
-      const obstacles2 = map.createStaticLayer('Obstacles2', tiles, 0, 0);
+      const platforms = houseaulamap.createStaticLayer('Ground', tiles, (config.width / 2 - houseaulamap.widthInPixels / 2), 192);
+      console.log(config.width);
+      const obstacles = houseaulamap.createStaticLayer('Obstacles', tiles, (config.width / 2 - houseaulamap.widthInPixels / 2), 192);
+      //const obstacles2 = map.createStaticLayer('Obstacles2', tiles, 0, 0);
   
       // make all tiles in obstacles collidable
       obstacles.setCollisionByExclusion([-1]);
-      obstacles2.setCollisionByExclusion([-1]);
+      //obstacles2.setCollisionByExclusion([-1]);
   
       //Set anims
       this.anims.create({
@@ -53,23 +54,32 @@ var houseAulaScene = new Phaser.Class({
         repeat: -1
       });
   
+  
+  
+      // don't go out of the map
+      this.physics.world.bounds.width = houseaulamap.widthInPixels;
+      this.physics.world.bounds.height = houseaulamap.heightInPixels;
+      this.physics.world.bounds.x = config.width / 2 - houseaulamap.widthInPixels / 2;
+      this.physics.world.bounds.y = 192;
+  
+  
+  
+  
+  
       // our player sprite created through the physics system
-      this.player = new Player(this, 700, 300, 'player', 18, 100, 20, 'Alice');
+      this.player = new Player(this, config.width / 2, this.physics.world.bounds.y + houseaulamap.heightInPixels + 16, 'player', 20, 100, 20, 'Alice');
       //this.player.scale(2);
       console.log(this.player);
       this.add.existing(this.player);
-  
-      // don't go out of the map
-      this.physics.world.bounds.width = map.widthInPixels;
-      this.physics.world.bounds.height = map.heightInPixels;
       this.player.setCollideWorldBounds(true);
+  
   
       // don't walk on trees
       this.physics.add.collider(this.player, obstacles);
-      this.physics.add.collider(this.player, obstacles2);
+      //this.physics.add.collider(this.player, obstacles2);
   
       // limit camera to map
-      this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+      this.cameras.main.setBounds(0, 0, houseaulamap.widthInPixels, houseaulamap.heightInPixels);
       this.cameras.main.startFollow(this.player);
       this.cameras.main.roundPixels = true; // avoid tile bleed
   
@@ -153,7 +163,7 @@ var houseAulaScene = new Phaser.Class({
       this.infoText.setText('Score: ' + this.score);
     },
   
-    onOpenDoor: function() {
+    onOpenDoor: function () {
       if (this.cursors.up.isDown) {
         console.log("opened!");
         this.scene.switch('houseAulaScene');
