@@ -1,7 +1,16 @@
-body {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+/* General Reset */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Crimson Text', serif, Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    background: linear-gradient(120deg, #013a3a, #042f4b);
+    color: #d1c1b6;
     min-height: 100vh;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
@@ -10,8 +19,14 @@ body {
 a {
 
     text-decoration: none;
-    color: #E5E7EB;
+    color: #d1c1b6;
+    text-decoration: none;
+    transition: color 0.3s ease;
     font-size: 18px;
+}
+
+li a:hover {
+    color: #b4d455;
 }
 
 ul {
@@ -40,8 +55,9 @@ ul {
 }
 
 .header {
-    background: #1F2937;
-    color: #F9FAF8;
+    background: rgba(10, 25, 25, 0.8);
+    backdrop-filter: blur(5px);
+    color: #b4d455;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
@@ -51,13 +67,14 @@ ul {
 
 
 .header-left {
-
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: left;
     gap: 10px;
     font-weight: bold;
-    color: #F9FAF8;
 
 }
 
@@ -73,39 +90,148 @@ ul {
 .content {
     flex: 1;
     display: flex;
+
   }
 
-.container {
+.main-content {
     padding: 32px;
     display: flex;
+    flex-direction: column;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #b4d455;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.btn-start {
+    display: inline-block;
+    background-color: #175f5f;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-start:hover {
+    background-color: #276b6b;
+    transform: scale(1.05);
+}
+
+.content-infoboxes {
+    padding: 80px 20px;
+    text-align: center;
+
+  }
+
+  .infoboxes-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    margin-bottom: 50px;
+    color: #b4d455;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(70%);
+}
+
+.card-content {
+    padding: 20px;
+    color: #d1c1b6;
+}
+
+.card h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #b4d455;
+}
+
+.card p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.sidebar {
+    width: 200px;
+    background: rgba(10, 25, 25, 0.8);
+    backdrop-filter: blur(5px);
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.4);
+    font-size: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    padding: 16px;
+    gap: 20px;
+}
+
+.sidebar li a {
+    color: #d1c1b6;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #175f5f;
+    color: #fff;
 }
 
 .footer {
     height: 72px;
-    background: #1F2937;
+    background: rgba(10, 25, 25, 0.8);
+    backdrop-filter: blur(5px);
     color: #E5E7EB;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.sidebar {
-    width: 200px;
-    background: #1F2937;
-    color: #F9FAF8;
-    font-size: 20px;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    padding: 16px;
-}
 
 
-.card {
-    border: 1px solid #eee;
-    box-shadow: 2px 4px 16px rgba(0, 0, 0, .06);
-    border-radius: 4px;
-    padding: 16px;
-    margin: 16px;
-    width: 250px;
-}
